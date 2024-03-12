@@ -1,0 +1,21 @@
+Đã hoàn thành:
+- Màn hình login 
+- Xác thực và phân quyền refresh token và access token
+- Junit test cho EmployeeService
+
+Đã sửa lỗi:
+BE: 
+- Việc lấy mã nhân viên mới đã thay đổi linh hoạt tiền tố tùy ý người dùng
+- Việc tạo Resource đã tách thành 2 file theo ngôn ngữ MsgResource_EN và MsgResource_VN
+
+FE:
+- Đã fix lại thông tin của employee, không còn fix cứng sẵn toàn bộ các thuộc tính.
+- Đã gộp việc lấy tổng số bản ghi + danh sách nhân viên vào chung 1 request.
+- Form Mode đã tách thành file Enum riêng có thể dùng cho tất cả mọi chỗ.
+- App vue đã chạy bình thường sau khi kéo node_modules về.
+
+tài khoản thông thường để đăng nhập và test ứng dụng
+username: thang password: Password@123
+
+tài khoản admin để đăng nhập và test ứng dụng
+username: thangadmin password: Password@123
