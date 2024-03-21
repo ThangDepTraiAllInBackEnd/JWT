@@ -1,0 +1,166 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture.core\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|solutionrelative:cleanarchitecture.core\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|solutionrelative:cleanarchitecture\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|solutionrelative:cleanarchitecture\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|solutionrelative:cleanarchitecture\\controllers\\authenticatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|solutionrelative:cleanarchitecture\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture\\controllers\\departmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{035404B2-16CB-49AC-B430-4E0D4E69CC19}|CleanArchitecture\\CleanArchitecture.csproj|solutionrelative:cleanarchitecture\\controllers\\departmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture.core\\entities\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|solutionrelative:cleanarchitecture.core\\entities\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture.core\\interfaces\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64D2E6A8-2A6C-47B2-BC10-A4EE0D8D868E}|CleanArchitecture.Core\\CleanArchitecture.Core.csproj|solutionrelative:cleanarchitecture.core\\interfaces\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9397AB7-2FD4-4B7B-9C61-971729F9828C}|CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj|c:\\users\\nguye\\documents\\misa\\misa\\current\\vaivut\\be\\employee-management\\cleanarchitecture.infrastructure\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9397AB7-2FD4-4B7B-9C61-971729F9828C}|CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj|solutionrelative:cleanarchitecture.infrastructure\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\appsettings.json",
+              "RelativeDocumentMoniker": "CleanArchitecture\\appsettings.json",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\appsettings.json",
+              "RelativeToolTip": "CleanArchitecture\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-18T06:54:01.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DepartmentController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\DepartmentController.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture\\Controllers\\DepartmentController.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\DepartmentController.cs",
+              "RelativeToolTip": "CleanArchitecture\\Controllers\\DepartmentController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthenticateController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\AuthenticateController.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture\\Controllers\\AuthenticateController.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\AuthenticateController.cs",
+              "RelativeToolTip": "CleanArchitecture\\Controllers\\AuthenticateController.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAA1wAcBAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "CleanArchitecture\\Controllers\\EmployeeController.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAAwCkAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Entities\\Employee.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Core\\Entities\\Employee.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Entities\\Employee.cs",
+              "RelativeToolTip": "CleanArchitecture.Core\\Entities\\Employee.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAADwv2IAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IEmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Interfaces\\IEmployeeRepository.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Core\\Interfaces\\IEmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Interfaces\\IEmployeeRepository.cs",
+              "RelativeToolTip": "CleanArchitecture.Core\\Interfaces\\IEmployeeRepository.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAwwD8AAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Services\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Core\\Services\\EmployeeService.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\Services\\EmployeeService.cs",
+              "RelativeToolTip": "CleanArchitecture.Core\\Services\\EmployeeService.cs",
+              "ViewState": "AQIAAKkCAAAAAAAAAAAIwGsCAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "CleanArchitecture\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T08:14:03.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\Repositories\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "CleanArchitecture.Infrastructure\\Repositories\\EmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\Repositories\\EmployeeRepository.cs",
+              "RelativeToolTip": "CleanArchitecture.Infrastructure\\Repositories\\EmployeeRepository.cs",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAqwNMAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T06:54:01.613Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

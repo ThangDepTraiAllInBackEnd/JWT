@@ -100,7 +100,8 @@ builder.Services.AddScoped<ICacheRepository, CacheRepository>();
 
 // mapper
 builder.Services.AddAutoMapper
-	(typeof(AutoMapperProfile).Assembly);
+	(typeof(AutoMapperProfile));
+//builder.Services.AddAutoMapper()
 
 builder.Services.AddMemoryCache();
 var app = builder.Build();

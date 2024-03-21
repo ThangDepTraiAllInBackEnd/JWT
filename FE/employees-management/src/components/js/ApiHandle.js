@@ -1,6 +1,6 @@
 import axios from "axios";
 import MResource from "../js/StringResource"
-// import { checkAuthentication } from "./TokenHandle";
+import { checkAuthentication } from "./TokenHandle";
 import { store } from "@/main";
 import { layoutRouter } from "@/main";
 
@@ -120,7 +120,7 @@ export function handleErr(error, type, emitter) {
     */
 export async function apiHandle(method, apiUrl, data, type, emitter) {
     try {
-        // await checkAuthentication(emitter);
+        await checkAuthentication(emitter);
         var token = localStorage.getItem(MResource.Token.AccessToken);
         emitter.emit(MResource.Event.TogleLoading, true);
         switch (method) {
@@ -153,7 +153,6 @@ export async function apiHandle(method, apiUrl, data, type, emitter) {
                         }
                     );
                     emitter.emit(MResource.Event.TogleLoading, false);
-                    console.log(apiResponse);
                     if (!apiResponse.data.Success) {
                         handleErr(apiResponse, MResource.ErrorType.misa, emitter);
                     } else {
@@ -195,6 +194,62 @@ export async function apiHandle(method, apiUrl, data, type, emitter) {
                 }
                 break;
             }
+            default:
+                break;
+        }
+    } catch (error) {
+        emitter.emit(MResource.Event.TogleLoading, false);
+        handleErr(error, MResource.ErrorType.browser, emitter);
+    }
+}
+
+
+/**
+    * api action with Files
+    * @param {*} method - get|post|put|delete
+    * @param {*} apiUrl - api url
+    * @param {*} data - data to send to api
+    * @param {*} emitter - to operate with error message
+    * @param {*} token - access token
+    * created by: Nguyễn Thiện Thắng
+    * created at: 2024/3/21
+    */
+export async function apiFileHandle(method, apiUrl, emitter, data, token) {
+    try {
+        await checkAuthentication(emitter);
+        emitter.emit(MResource.Event.TogleLoading, true);
+        switch (method) {
+            case MResource.apiMethod.get: {
+                // get file form api
+                const response = await axios.get(
+                    apiUrl,
+                    {
+                        responseType: MResource.apiHeaderContentType.arrayType,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                emitter.emit(MResource.Event.TogleLoading, false);
+                return (response);
+            }
+
+            case MResource.apiMethod.post: {
+                const response = await axios.post(
+                    apiUrl,
+                    data,
+                    {
+                        responseType: MResource.apiHeaderContentType.arrayType,
+                        headers: {
+                            "Content-Type": MResource.apiHeaderContentType.applicationType,
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                emitter.emit(MResource.Event.TogleLoading, false);
+                return (response);
+            }
+
             default:
                 break;
         }

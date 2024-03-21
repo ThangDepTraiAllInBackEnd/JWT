@@ -22,16 +22,20 @@ namespace CleanArchitecture.Core.Interfaces
 		///  created at: 2024/1/9
 		public Task<ServiceResult> PreviewFileAsync(IFormFile excelFile);
 
-		/// <summary>
-		/// exprot file for user base user's current page, page size and search key word
-		/// </summary>
-		/// <param name="page">Current page </param>
-		///  <param name="pageSize">record'number /page </param>
-		///  <param name="key">search key </param>
-		/// <returns>Service result ( sucsess or failed with all details )</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2024/15/1
-		public Task<ServiceResult> ExportFileAsync(int page, int pageSize, string key);
+        /// <summary>
+        /// exprot file for user base user's current page, page size and search key word
+        /// </summary>
+        /// <param name="page">Current page </param>
+        ///  <param name="pageSize">record'number /page </param>
+        ///  <param name="key">search key </param>
+        ///  <param name="importKey">key to import if data mode = 2 </param>
+        ///  <param name="dataMode">data resource
+		///  1 - From DataBase
+		///  2 - Form cacche
+        /// <returns>Service result ( sucsess or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/15/1
+        public Task<ServiceResult> ExportFileAsync(int page, int pageSize, string key, string importKey, int dataMode);
 
 		/// <summary>
 		/// Convert data from DB to service format
@@ -87,5 +91,22 @@ namespace CleanArchitecture.Core.Interfaces
 		///  created by: Nguyễn Thiện Thắng
 		///  created at: 2024/2/1
 		public Task<ServiceResult> ImportFileAsync(string key);
-	}
+
+        /// <summary>
+        /// Get sample excelfile to import employee
+        /// </summary>
+        /// <returns>Service result ( sucsess or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/3/20
+        public Task<ServiceResult> GetSampleExcelFileAsync();
+
+        /// <summary>
+        /// get invalid employee list from previous preview, write to ecxel file and return for client
+        /// </summary>
+        ///  <param name="key">Cache key to get invalid employees from cache </param>
+        /// <returns>Service result ( sucsess or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/3/20
+        //public Task<ServiceResult> GetErrorExcelFileAsync(string key); 
+    }
 }

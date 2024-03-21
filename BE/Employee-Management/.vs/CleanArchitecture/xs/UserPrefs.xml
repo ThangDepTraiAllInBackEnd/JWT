@@ -1,0 +1,41 @@
+﻿<Properties StartupConfiguration="{035404B2-16CB-49AC-B430-4E0D4E69CC19}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CleanArchitecture.Core/Services/EmployeeService.cs">
+    <Files>
+      <File FileName="CleanArchitecture/Controllers/EmployeeController.cs" />
+      <File FileName="CleanArchitecture.Core/Services/EmployeeService.cs" Line="457" Column="1" />
+      <File FileName="CleanArchitecture.Core/Interfaces/IEmployeeService.cs" />
+      <File FileName="CleanArchitecture/Program.cs" />
+      <File FileName="CleanArchitecture.Core/Mapper/AutoMapperProfile.cs" />
+      <File FileName="CleanArchitecture.Core/DTOs/ServiceResult.cs" />
+      <File FileName="CleanArchitecture.Core/DTOs/EmployeeImport.cs" />
+      <File FileName="CleanArchitecture.Core/Entities/Employee.cs" />
+      <File FileName="CleanArchitecture.Core/DTOs/Page.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CleanArchitecture">
+            <Node name="CleanArchitecture" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="CleanArchitecture.Core" expanded="True">
+              <Node name="Services" expanded="True">
+                <Node name="EmployeeService.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Core/Services/EmployeeService.cs" relfile="CleanArchitecture.Core/Services/EmployeeService.cs" line="835" column="3" />
+      <Breakpoint file="/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Core/Services/EmployeeService.cs" relfile="CleanArchitecture.Core/Services/EmployeeService.cs" line="429" column="4" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.CleanArchitecture PreferredExecutionTarget="/Applications/Google Chrome.app" />
+</Properties>

@@ -65,6 +65,11 @@ export default {
       isInputFocused: false,
     };
   },
+  beforeUnmount() {
+    if (this.$refs.inputTagRef) {
+      this.$refs.inputTagRef.blur();
+    }
+  },
   methods: {
     /**
      *  validate value if valid -> update value for data in parent component
@@ -74,43 +79,52 @@ export default {
      *  created_at: 2024/1/20
      */
     validateInput(newValue) {
-      if (this.isRequired) {
-        if (newValue) {
-          this.$emit("update:value", this.inputValue);
-          // update value from parent component
-          this.inputValue = newValue;
-          this.errMsg = "";
+      if (this.type === "date") {
+        var inputDate = new Date(newValue);
+        if (inputDate > new Date()) {
+          this.$emit("update:value", inputDate);
+          this.errMsg = "Ngày không được lớn hơn ngày hiện tại";
           return this.errMsg;
         }
-      }
-      // regex exist
-      if (this.regex) {
-        if (this.regex.test(newValue)) {
-          this.$emit("update:value", this.inputValue);
-          this.errMsg = "";
-          this.inputValue = newValue;
-          return this.errMsg;
+      } else {
+        if (this.isRequired) {
+          if (newValue) {
+            this.$emit("update:value", this.inputValue);
+            // update value from parent component
+            this.inputValue = newValue;
+            this.errMsg = "";
+            return this.errMsg;
+          }
         }
-      }
-      // catched all valid case above when regex | required -> if this code block -> auto not valid
-      if (this.regex || this.isRequired) {
-        if (
-          !newValue ||
-          isNaN(newValue) ||
-          newValue === "" ||
-          newValue === null
-        ) {
-          this.$emit("update:value", "");
-          this.errMsg = this.requiredMsg;
-          this.focusInput();
-          return this.errMsg;
+        // regex exist
+        if (this.regex) {
+          if (this.regex.test(newValue)) {
+            this.$emit("update:value", this.inputValue);
+            this.errMsg = "";
+            this.inputValue = newValue;
+            return this.errMsg;
+          }
         }
+        // catched all valid case above when regex || required -> if this code block -> auto not valid
+        if (this.regex || this.isRequired) {
+          if (
+            !newValue ||
+            isNaN(newValue) ||
+            newValue === "" ||
+            newValue === null
+          ) {
+            this.$emit("update:value", "");
+            this.errMsg = this.requiredMsg;
+            this.focusInput();
+            return this.errMsg;
+          }
+        }
+        // there no required and regex
+        this.inputValue = newValue;
+        this.$emit("update:value", newValue);
+        this.errMsg = "";
+        return this.errMsg;
       }
-      // there no required and regex
-      this.inputValue = newValue;
-      this.$emit("update:value", newValue);
-      this.errMsg = "";
-      return this.errMsg;
     },
     /**
      *  set data base parent component and display into input filed
@@ -127,9 +141,11 @@ export default {
      *  created_at: 2024/1/20
      */
     focusInput() {
-      this.$nextTick(() => {
-        this.$refs.inputTagRef.focus();
-      });
+      if (this.$refs.inputTagRef) {
+        this.$nextTick(() => {
+          this.$refs.inputTagRef.focus();
+        });
+      }
     },
   },
 };

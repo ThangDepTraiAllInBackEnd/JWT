@@ -29,7 +29,9 @@ const MResource = {
         confirmSingleDeleteBack: " không?",
         confirmDataChange: "Dữ liệu đã thay đổi, bạn có muốn cất không ?",
         authorizeWarning: "Bạn không có quyền xem nội dung này",
-        expiresLoginSession: "Phiên đăng nhập của bạn đã hết hạn, vui lòng đăng nhập lại."
+        expiresLoginSession: "Phiên đăng nhập của bạn đã hết hạn, vui lòng đăng nhập lại.",
+        employeeExcelFileMustBeValid: "Vui lòng chọn 1 file đúng định dạng file mẫu để chuyển sang màn hình này.",
+        employeeExcelFileMustBeImport: "Tiến hành nhập khẩu thành công để chuyển sang màn hình này."
     },
 
     DialogIcon: {
@@ -44,7 +46,9 @@ const MResource = {
     },
 
     FileName: {
-        EmployeeFile: "Danh_Sach_Nhanh_Vien.xlsx"
+        EmployeeFile: "Danh_Sach_Nhanh_Vien.xlsx",
+        SampleEmployeeImportExcelFile: "SampleEmployeeImport.xlsx",
+        EmployeeExcelFile: "EmployeeExcelFile.xlsx"
     },
 
     EmployoeeFileTitle: {
@@ -92,6 +96,8 @@ const MResource = {
         deleteEmployeees: "https://localhost:7250/api/v1/Employee/ManyDelete",
         getTotalEmployeeRecord: "https://localhost:7250/api/v1/Employee/TotalEmployee",
         getDepartment: "https://localhost:7250/api/v1/Department",
+        getSampleEmployeeExcelFile: "https://localhost:7250/api/v1/Employee/GetSampleExcelFile",
+        getEmployeeImportExcelFileBaseKey: "https://localhost:7250/api/v1/Employee/GetEmployeeExcelFileBaseKey"
     },
     apiMethod: {
         get: "get",

@@ -265,7 +265,7 @@ import EmployeeImportFile from "./EmployeeImportFile.vue";
 import MPageSize from "@/components/base/MPageSize.vue";
 
 import { apiHandle } from "../../../js/ApiHandle";
-import { handleErr } from "../../../js/ApiHandle";
+import { apiFileHandle } from "../../../js/ApiHandle";
 import { checkAuthentication } from "../../../js/TokenHandle";
 import MResource from "../../../js/StringResource";
 import Enum from "../../../js/Enum";
@@ -583,39 +583,29 @@ export default {
      *  created at: 2024/1/20
      */
     async exportEmployeesToExcelFile(option) {
-      await checkAuthentication(this.emitter);
       if (option === 1) {
         this.exportApiUrl = `page=${this.currentPage}&size=${this.currentPageSize}&key=${this.searchKey}`;
       } else {
         this.exportApiUrl = `page=${this.currentPage}&size=${this.totalRecord}`;
       }
       this.togleExportOption();
-
-      try {
-        let token = localStorage.getItem(MResource.Token.AccessToken);
-        this.emitter.emit(MResource.Event.TogleLoading, true);
-        // get file form api
-        const response = await this.api.get(
-          this.resource.apiData.exportEmployees + this.exportApiUrl,
-          {
-            responseType: MResource.apiHeaderContentType.arrayType,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const blob = new Blob([response.data], {
+      let token = localStorage.getItem(MResource.Token.AccessToken);
+      this.emitter.emit(MResource.Event.TogleLoading, true);
+      // get file form api
+      const response = await apiFileHandle(
+        MResource.apiMethod.get,
+        this.resource.apiData.exportEmployees + this.exportApiUrl,
+        this.emitter,
+        null,
+        token
+      );
+      if (response.data) {
+        const blob = new Blob([response?.data], {
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
         const fileName = MResource.FileName.EmployeeFile;
         // using file-save to dowload file
         this.saveAs(blob, fileName);
-        this.emitter.emit(MResource.Event.TogleLoading, false);
-      } catch (error) {
-        this.emitter.emit(MResource.Event.TogleLoading, false);
-        console.log(error);
-        handleErr(error, MResource.ErrorType.browser, this.emitter);
       }
     },
   },
@@ -633,6 +623,8 @@ export default {
 }
 
 .main-content {
+  display: flex;
+  flex-direction: column;
   height: calc(100% - 67.03px);
   width: 100%;
   padding: 0 12px;
@@ -748,7 +740,9 @@ export default {
 
 /* table */
 .main-data-table {
-  max-height: 67vh;
+  /* flex: 1;   */
+  /* max-height: 67vh; */
+  height: calc(100% - 115px);
   overflow: scroll;
   border-bottom: 1px solid #e0e0e0;
 }

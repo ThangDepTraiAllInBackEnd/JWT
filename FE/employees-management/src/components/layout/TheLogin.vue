@@ -94,7 +94,6 @@ export default {
         );
         this.isAuthenticate = this.$store.state.isAuthenticate;
         if (userResponse) {
-          console.log(userResponse);
           this.$store.commit("changeAuthenticateStatus", true);
           this.$router.push("/employee-layout");
           localStorage.setItem(

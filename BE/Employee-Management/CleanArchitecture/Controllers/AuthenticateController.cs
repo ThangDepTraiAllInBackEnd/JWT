@@ -63,12 +63,12 @@ namespace CleanArchitecture.Controllers
 				var token = CreateToken(authClaims);
 				var refreshToken = GenerateRefreshToken();
 
-				_ = int.TryParse(_configuration["JWT:RefreshTokenValidityInMinutes"], out int refreshTokenValidityInMinutes);
+				_ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
 
 				user.RefreshToken = refreshToken;
-				user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
 
-				await _userManager.UpdateAsync(user);
+                await _userManager.UpdateAsync(user);
 
 				return StatusCode(200, new ServiceResult
 				{
@@ -209,7 +209,6 @@ namespace CleanArchitecture.Controllers
 			});
 		}
 
-
 		/// <summary>	
 		/// create new access token and refresh token bass current tokens
 		/// </summary>
@@ -251,7 +250,6 @@ namespace CleanArchitecture.Controllers
 
 			return StatusCode(200, new ServiceResult
 			{
-
 				Code = System.Net.HttpStatusCode.OK,
 				Success = true,
 				Data
@@ -305,37 +303,37 @@ namespace CleanArchitecture.Controllers
 		}
 
 
-		/// <summary>	
-		/// create new access token 
-		/// </summary>
-		/// <param name="authClaims">token's claims</param>
-		/// <returns>new access token</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2024/26/2
-		private JwtSecurityToken CreateToken(List<Claim> authClaims)
-		{
-			var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-			_ = int.TryParse(_configuration["JWT:TokenValidityInMinutes"], out int tokenValidityInMinutes);
+        /// <summary>	
+        /// create new access token 
+        /// </summary>
+        /// <param name="authClaims">token's claims</param>
+        /// <returns>new access token</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/26/2
+        private JwtSecurityToken CreateToken(List<Claim> authClaims)
+        {
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+            _ = int.TryParse(_configuration["JWT:TokenValidityInMinutes"], out int tokenValidityInMinutes);
 
-			var token = new JwtSecurityToken(
-				issuer: _configuration["JWT:ValidIssuer"],
-				audience: _configuration["JWT:ValidAudience"],
-				expires: DateTime.UtcNow.AddMinutes(tokenValidityInMinutes),
-				claims: authClaims,
-				signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-				);
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddMinutes(tokenValidityInMinutes),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                );
 
-			return token;
-		}
+            return token;
+        }
 
 
-		/// <summary>	
-		/// create new refresh token 
-		/// </summary>
-		/// <returns>new refresh token</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2024/26/2
-		private static string GenerateRefreshToken()
+        /// <summary>	
+        /// create new refresh token 
+        /// </summary>
+        /// <returns>new refresh token</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/26/2
+        private static string GenerateRefreshToken()
 		{
 			var randomNumber = new byte[64];
 			using var rng = RandomNumberGenerator.Create();

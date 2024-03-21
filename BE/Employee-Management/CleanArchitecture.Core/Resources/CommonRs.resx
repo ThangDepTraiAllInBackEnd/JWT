@@ -123,10 +123,17 @@
   <data name="EmployeeFileName" xml:space="preserve">
     <value>Danh_Sach_Nhan_Vien.xlsx</value>
   </data>
+   <data name="EmployeeSampleFileName" xml:space="preserve">
+    <value>Danh_Sach_Nhan_Vien_Sample.xlsx</value>
+  </data>
   <data name="EmployeeWorkSheetName" xml:space="preserve">
     <value>Danh_Sach_Nhan_Vien</value>
   </data>
   <data name="UploadFolderName" xml:space="preserve">
     <value>UploadedFiles</value>
   </data>
+    <data name="SampleFolder" xml:space="preserve">
+    <value>SampleFiles</value>
+  </data>
+  
 </root>

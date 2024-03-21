@@ -52,9 +52,17 @@
           />
 
           <m-button text="Chọn tệp" type="secondary" @click="openFileInput" />
+          <p>
+            Chưa có tệp mẫu để chuẩn bị dữ liệu? Tải tệp mẫu mà phần mềm cung
+            cấp để chuẩn bị dữ liệu nhập khẩu
+            <span class="blueClicks" @click="getSampleExcelFile()"
+              >Tại đây</span
+            >
+          </p>
         </div>
       </div>
-      <div v-if="isShowtable">
+
+      <div v-if="isShowtable" class="view-table-container">
         <p class="notification-top">
           <span class="notification-top-left"
             >{{ this.successNumber }}/{{ this.employees.length }} dòng hợp
@@ -117,10 +125,24 @@
             </tbody>
           </table>
         </div>
-        <div class="text-donwload-file"></div>
+
+        <div class="text-donwload-file">
+          <p v-if="failedNumer > 0">
+            Tải về tập tin chứa các dòng nhập khẩu không thành công
+            <span class="blueClicks" @click="getEmployeeExcelFileBaseKey(2)"
+              >Tại đây</span
+            >
+          </p>
+        </div>
       </div>
       <div v-if="isShowImportResult">
         <h2>Kết quả nhập khẩu</h2>
+        <p v-if="failedNumer > 0">
+          Tải về tập tin chứa kết quả nhập khẩu
+          <span class="blueClicks" @click="getEmployeeExcelFileBaseKey(1)"
+            >Tại đây</span
+          >
+        </p>
         <p class="result-bumber">
           + Số dòng nhập khẩu thành công: {{ this.successNumber }}
         </p>
@@ -177,7 +199,7 @@
           icon="fa-solid fa-ban "
           v-if="!isShowImportResult"
           :isDanger="true"
-          @click="cancelAction"
+          @click="togleImportFile"
         />
         <m-button
           text="Đóng"
@@ -205,9 +227,9 @@
 import MButton from "../../../base/MButton.vue";
 import MDialog from "@/components/base/MDialog.vue";
 
-import  MResource  from "../../../js/StringResource";
+import MResource from "../../../js/StringResource";
 import { apiHandle } from "../../../js/ApiHandle";
-import { checkAuthentication } from "../../../js/TokenHandle";
+import { apiFileHandle } from "../../../js/ApiHandle";
 
 export default {
   name: "EmployeeImportFile",
@@ -232,12 +254,16 @@ export default {
       currentTitle: MResource.EmployoeeFileTitle.ResourceFile,
       failedNumer: 0,
       successNumber: 0,
+      isImportSuccess: false,
       // for dialog
       isShowDialog: false,
       dialogMsgs: [],
       dialogType: "",
       dialogIcon: "",
-      cacheKey: "",
+      validToImportCacheKey: "",
+      invalidEmployeesCacheKey: "",
+      // original key include success employee and failed employee
+      employeeImportCacheKey: "",
     };
   },
   methods: {
@@ -251,28 +277,59 @@ export default {
      *  created at: 2024/1/28
      */
     changeView(viewOption) {
-      switch (viewOption) {
-        case 1:
-          this.isShowtable = false;
-          this.isShowImportResult = false;
-          this.isShowInputFile = true;
-          this.currentTitle = MResource.EmployoeeFileTitle.ResourceFile;
-          break;
-        case 2:
-          this.isShowImportResult = false;
-          this.isShowInputFile = false;
-          this.isShowtable = true;
-          this.currentTitle = MResource.EmployoeeFileTitle.DataCheck;
-          break;
-        case 3:
-          this.isShowtable = false;
-          this.isShowImportResult = true;
-          this.isShowInputFile = false;
-          this.currentTitle = MResource.EmployoeeFileTitle.ImportResult;
-          break;
-        default:
-          break;
+      if (this.isFileValid()) {
+        switch (viewOption) {
+          case 1:
+            this.isShowtable = false;
+            this.isShowImportResult = false;
+            this.isShowInputFile = true;
+            this.currentTitle = MResource.EmployoeeFileTitle.ResourceFile;
+            break;
+          case 2:
+            this.isShowImportResult = false;
+            this.isShowInputFile = false;
+            this.isShowtable = true;
+            this.currentTitle = MResource.EmployoeeFileTitle.DataCheck;
+            break;
+          case 3:
+            // not imported yet
+            if (!this.isImportSuccess) {
+              this.emitter.emit(
+                MResource.Event.TogleDialog,
+                [MResource.DialogMsg.employeeExcelFileMustBeImport],
+                MResource.DialogType.warning,
+                MResource.DialogIcon.warning
+              );
+            } else {
+              this.isShowtable = false;
+              this.isShowImportResult = true;
+              this.isShowInputFile = false;
+              this.currentTitle = MResource.EmployoeeFileTitle.ImportResult;
+            }
+            break;
+          default:
+            break;
+        }
       }
+    },
+
+    /**
+     * check is file valid before change view
+     * 	created by: Nguyễn Thiện Thắng
+     *  created at: 2024/3/19
+     */
+    isFileValid() {
+      // file invalid
+      if (this.selectedFile == null) {
+        this.emitter.emit(
+          MResource.Event.TogleDialog,
+          [MResource.DialogMsg.employeeExcelFileMustBeValid],
+          MResource.DialogType.warning,
+          MResource.DialogIcon.warning
+        );
+        return false;
+      }
+      return true;
     },
     /**
      * Open file browser by custom button
@@ -291,6 +348,10 @@ export default {
     handleFileChange(event) {
       const selectedFile = event.target.files[0];
       this.selectedFile = selectedFile;
+      this.employees = [];
+      this.successNumber = 0;
+      this.failedNumer = 0;
+      this.isImportSuccess = false;
       this.previewEmployees();
     },
     /**
@@ -299,11 +360,9 @@ export default {
      *  created at: 2024/1/28
      */
     async previewEmployees() {
-      await checkAuthentication(this.emitter);
       this.employees = [];
       this.successNumber = 0;
       this.failedNumer = 0;
-
       const formData = new FormData();
       formData.append("excelFile", this.selectedFile);
       const employeeResponse = await apiHandle(
@@ -315,8 +374,12 @@ export default {
       );
       if (employeeResponse) {
         this.employees = employeeResponse.data.Data.employeesImport;
-        this.cacheKey = employeeResponse.data.Data.cachekey;
-        this.emitter.emit(MResource.Event.TogleLoading, false);
+        this.validToImportCacheKey =
+          employeeResponse.data.Data.validToImportCacheKey;
+        this.invalidEmployeesCacheKey =
+          employeeResponse.data.Data.invalidEmployeeCacheKey;
+        this.employeeImportCacheKey =
+          employeeResponse.data.Data.employeeImportCacheKey;
         this.emitter.emit(
           MResource.Event.TogleToast,
           MResource.ToastStatus.success,
@@ -330,9 +393,71 @@ export default {
             this.failedNumer++;
           }
         });
+        this.changeView(2);
+      } else {
+        this.selectedFile = null;
       }
     },
-    /* format date to dd/mm/yyyy
+    /**
+     * Get sample employee excelFile to import
+     * 	created by: Nguyễn Thiện Thắng
+     *  created at: 2024/3/21
+     */
+    async getSampleExcelFile() {
+      let token = localStorage.getItem(MResource.Token.AccessToken);
+      // get file form api
+      const response = await apiFileHandle(
+        MResource.apiMethod.get,
+        this.resource.apiData.getSampleEmployeeExcelFile,
+        this.emitter,
+        null,
+        token
+      );
+      if (response?.data) {
+        const blob = new Blob([response.data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        const fileName = MResource.FileName.SampleEmployeeImportExcelFile;
+        // using file-save to dowload file
+        this.saveAs(blob, fileName);
+      }
+    },
+
+    /**
+     * Get error employee file from previouse preview
+     * @param {*} getType
+     * 1 - get original file( include success and failed employee )
+     * 2 - get Error File
+     * 	created by: Nguyễn Thiện Thắng
+     *  created at: 2024/3/21
+     */
+    async getEmployeeExcelFileBaseKey(getType) {
+      let key = "";
+      if (getType === 1) {
+        key = this.employeeImportCacheKey;
+      } else {
+        key = this.invalidEmployeesCacheKey;
+      }
+      let token = localStorage.getItem(MResource.Token.AccessToken);
+      // get file form api
+      const response = await apiFileHandle(
+        MResource.apiMethod.post,
+        this.resource.apiData.getEmployeeImportExcelFileBaseKey,
+        this.emitter,
+        key,
+        token
+      );
+      if (response?.data) {
+        const blob = new Blob([response.data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        const fileName = MResource.FileName.EmployeeExcelFile;
+        // using file-save to dowload file
+        this.saveAs(blob, fileName);
+      }
+    },
+
+    /** format date to dd/mm/yyyy
      * @param {*} inputDateString - Date to format
      * @returns - Date formated
      * 	created by: Nguyễn Thiện Thắng
@@ -357,7 +482,7 @@ export default {
       const employeeResponse = await apiHandle(
         MResource.apiMethod.post,
         MResource.apiData.importEmployees,
-        this.cacheKey,
+        this.validToImportCacheKey,
         MResource.apiHeaderContentType.applicationType,
         this.emitter
       );
@@ -368,20 +493,9 @@ export default {
           employeeResponse.data.UserMsg,
           true
         );
+        this.isImportSuccess = true;
         this.changeView(3);
       }
-    },
-    /**
-     * cancel action and reset the import file form and all data from file
-     * 	created by: Nguyễn Thiện Thắng
-     *  created at: 2024/1/20
-     */
-    cancelAction() {
-      this.selectedFile = null;
-      this.employees = [];
-      this.currentTitle = MResource.EmployoeeFileTitle.ResourceFile;
-      this.failedNumer = 0;
-      this.successNumber = 0;
     },
     /**
      * togle notice dialog
@@ -409,9 +523,16 @@ a {
   color: #0103ee;
 }
 
+.blueClicks {
+  color: #0103ee;
+}
+
+.blueClicks:hover {
+  color: #393cec;
+  cursor: pointer;
+}
+
 .main-container {
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 50%;
@@ -443,6 +564,7 @@ a {
 .main {
   border: 1px solid #dedede;
   grid-area: main;
+  height: calc(100vh - 56px - 56px);
   padding-left: 12px;
 }
 
@@ -524,9 +646,14 @@ a {
   margin-bottom: 12px;
 }
 /* Table */
+
+.view-table-container {
+  height: 100%;
+}
+
 .table-container {
-  overflow-y: scroll;
-  max-height: 76vh;
+  overflow: scroll;
+  height: calc(100% - 90px);
   border-bottom: 1px solid #e0e0e0;
 }
 

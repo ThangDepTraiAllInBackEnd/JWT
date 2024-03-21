@@ -3,7 +3,7 @@
 - Xác thực và phân quyền refresh token và access token
 - Junit test cho EmployeeService
 
-Đã sửa lỗi:
+Đã sửa lỗi tuần 2:
 BE: 
 - Việc lấy mã nhân viên mới đã thay đổi linh hoạt tiền tố tùy ý người dùng
 - Việc tạo Resource đã tách thành 2 file theo ngôn ngữ MsgResource_EN và MsgResource_VN
@@ -13,6 +13,19 @@ FE:
 - Đã gộp việc lấy tổng số bản ghi + danh sách nhân viên vào chung 1 request.
 - Form Mode đã tách thành file Enum riêng có thể dùng cho tất cả mọi chỗ.
 - App vue đã chạy bình thường sau khi kéo node_modules về.
+
+----------------------------------------------------------------------------------
+Đã sửa lỗi tuần 3 + 4:
+UI: 
+- Đã căn chỉnh bỏ khoảng trống tại table và form
+FE: 
+- đã kiểm tra trường hợp nhập ngày lớn hơn ngày hiện tại -> báo lỗi
+- đã có thể hủy bỏ tại màn hình nhập khẩu
+- nếu chọn tệp thành công thì sẽ tự động chuyển sang màn hình khác, nếu tệp không hợp lệ sẽ báo lỗi và không cho chuyển màn hình 
+
+Update
+- Thêm chức năng tải file mẫu, tải file lỗi 
+- Thêm chức năng tải file kết quả nhập khẩu sau khi nhập khẩu thành công
 
 tài khoản thông thường để đăng nhập và test ứng dụng
 username: thang password: Password@123

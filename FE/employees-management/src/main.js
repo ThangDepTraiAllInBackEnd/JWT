@@ -21,6 +21,7 @@ import TheLayout from './components/layout/TheLayout'
 
 const layoutRoutes = [
     { path: '/', redirect: '/login' },
+    // { path: '/', redirect: '/employee-list' },
     { path: '/login', component: TheLogin },
     { path: '/employee-layout', redirect: '/employee-list' },
     {

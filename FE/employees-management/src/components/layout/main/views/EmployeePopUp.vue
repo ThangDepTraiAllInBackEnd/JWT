@@ -313,9 +313,9 @@ export default {
      */
     togleDialog() {
       if (this.isValidating) {
-        this.$refs.DepartmentId.strictSearch();
-        this.$refs.EmployeeName.validateInput(this.Employee.EmployeeName);
-        this.$refs.EmployeeCode.validateInput(this.Employee.EmployeeCode);
+        // this.$refs.DepartmentId.strictSearch();
+        // this.$refs.EmployeeName.validateInput(this.Employee.EmployeeName);
+        // this.$refs.EmployeeCode.validateInput(this.Employee.EmployeeCode);
       }
       this.isShowDialog = !this.isShowDialog;
     },
@@ -495,7 +495,7 @@ export default {
       if (this.isAllDataValid()) {
         this.submitForm();
       }
-    },
+    },  
     /**
      * Check is all employee props valid before submit
      * 	created by: Nguyễn Thiện Thắng
@@ -510,8 +510,17 @@ export default {
       let nameMsg = this.$refs.EmployeeName.validateInput(
         this.Employee.EmployeeName
       );
+
+      let birthDateMsg = this.$refs.BirthDate.validateInput(
+        this.Employee?.BirthDate
+      );
       // all required data is valid
-      if (codeMsg === "" && nameMsg === "" && departmentMsg === "") {
+      if (
+        codeMsg === "" &&
+        nameMsg === "" &&
+        departmentMsg === "" &&
+        birthDateMsg == ""
+      ) {
         return true;
       }
       this.isValidating = true;
@@ -519,6 +528,7 @@ export default {
       this.dialogMsgs.push(codeMsg);
       this.dialogMsgs.push(nameMsg);
       this.dialogMsgs.push(departmentMsg);
+      this.dialogMsgs.push(birthDateMsg);
       this.dialogType = MResource.DialogType.error;
       this.dialogIcon = MResource.DialogIcon.error;
       this.isShowDialog = !this.isShowDialog;
@@ -713,7 +723,6 @@ export default {
         this.$refs[propName].validateInput(employeeClone[propName]);
       });
       this.Employee = Object.assign({}, this.employeeParameter);
-      console.log(this.Employee);
     },
   },
 };
@@ -739,7 +748,6 @@ export default {
   top: 7.5%;
   width: 65vw;
   padding: 0 24px;
-  height: 85%;
   border-radius: 4px;
   background-color: #ffff;
 }
@@ -797,7 +805,7 @@ export default {
 
 .popup-form {
   position: relative;
-  height: 100%;
+  height: calc(100% - 59.03px);
 }
 
 .form-row {

@@ -1,0 +1,15 @@
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/bin/Release/net6.0/CleanArchitecture.Infrastructure.deps.json
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/bin/Release/net6.0/CleanArchitecture.Infrastructure.dll
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/bin/Release/net6.0/CleanArchitecture.Infrastructure.pdb
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/bin/Release/net6.0/CleanArchitecture.Core.dll
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/bin/Release/net6.0/CleanArchitecture.Core.pdb
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.csproj.AssemblyReference.cache
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.AssemblyInfoInputs.cache
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.AssemblyInfo.cs
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.csproj.CopyComplete
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.dll
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/refint/CleanArchitecture.Infrastructure.dll
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/CleanArchitecture.Infrastructure.pdb
+/Users/thangnguyenthien/Documents/Code/NET/Current/vaivut/BE/Employee-Management/CleanArchitecture.Infrastructure/obj/Release/net6.0/ref/CleanArchitecture.Infrastructure.dll

@@ -25,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="UploadedFiles\" />
+    <Folder Include="SampleFiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="SampleFiles\" />
+  </ItemGroup>
 </Project>

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Drawing;
 using System.Xml.Linq;
 
 namespace CleanArchitecture.Controllers
@@ -194,7 +196,7 @@ namespace CleanArchitecture.Controllers
 			{
 				searchValue = key;
 			}
-			var result = await _employeeService.ExportFileAsync(page, size, searchValue);
+			var result = await _employeeService.ExportFileAsync(page, size, searchValue,"", 1);
 
 			// Export excelFile sucess and data exist
 			if (result.Success && result.Data != null)
@@ -234,5 +236,75 @@ namespace CleanArchitecture.Controllers
 			return StatusCode((int)res.Code, res);
 		}
 
-	}
+
+        /// <summary>
+        /// Get sample excel file to import employee
+        /// </summary>
+        /// <returns>Sample employee excel file to import</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2023/3/20
+        [HttpGet("/api/v1/Employee/GetSampleExcelFile")]
+        public async Task<IActionResult> GetSampleFile()
+        {
+
+            var result = await _employeeService.GetSampleExcelFileAsync();
+
+            // Export excelFile sucess and data exist
+            if (result.Success && result.Data != null)
+            {
+                var excelData = (Dictionary<string, object>)result.Data;
+                var fileBytes = (byte[])excelData["FileBytes"];
+                var fileName = (string)excelData["FileName"];
+
+
+                //return excel 
+                return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName, true);
+            }   // Export error
+            else
+            {
+                return StatusCode(500, new ServiceResult()
+                {
+                    Success = false,
+                    Code = System.Net.HttpStatusCode.BadGateway,
+                    UserMsg = Core.Resources.MsgResource_VN.CommonErrr,
+                    MsgResource_VN = Core.Resources.MsgResource_VN.CommonErrr,
+                    Data = null,
+                });
+            }
+        }
+
+        /// <summary>
+        /// Get Error or Succes employee excel file form previous preview base key
+        /// </summary>
+        /// <returns>Error or success employee excel file form previous preview</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2023/3/21
+        [HttpPost("/api/v1/Employee/GetEmployeeExcelFileBaseKey")]
+        public async Task<IActionResult> GetErrorOrSuccessExcelFile([FromBody] string key)
+        {
+            var result = await _employeeService.ExportFileAsync(0,0, "",key, 2);
+            // Export excelFile sucess and data exist
+            if (result.Success && result.Data != null)
+            {
+                var excelData = (Dictionary<string, object>)result.Data;
+                var fileBytes = (byte[])excelData["FileBytes"];
+                var fileName = (string)excelData["FileName"];
+
+
+                //return excel 
+                return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName, true);
+            }   // Export error
+            else
+            {
+                return StatusCode(500, new ServiceResult()
+                {
+                    Success = false,
+                    Code = System.Net.HttpStatusCode.BadGateway,
+                    UserMsg = Core.Resources.MsgResource_VN.CommonErrr,
+                    MsgResource_VN = Core.Resources.MsgResource_VN.CommonErrr,
+                    Data = null,
+                });
+            }
+        }
+    }
 }
