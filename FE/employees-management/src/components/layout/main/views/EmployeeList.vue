@@ -439,12 +439,14 @@ export default {
           employeeResponse.data.UserMsg,
           true
         );
+        // multiple delete
         if (this.deleteMode === 2) {
           this.checkedEmployees = [];
           this.numberOfChecked = 0;
         } else if (this.deleteMode === 1) {
           this.numberOfChecked--;
         }
+        this.deleteData = null;
         this.isAllChecked = false;
         this.updateSearchKey("");
         this.getEmployees(1);
@@ -469,7 +471,9 @@ export default {
       } else {
         this.deleteMode = 2;
         this.dialogMsgs = [`${MResource.DialogMsg.confirmMultipleDelete}`];
-        this.deleteData = this.checkedEmployees;
+        this.deleteData = this.checkedEmployees.map(
+          (employee) => employee.EmployeeId
+        );
       }
       this.dialogType = MResource.DialogType.deleteConfirm;
       this.dialogIcon = MResource.DialogIcon.warning;
@@ -493,8 +497,8 @@ export default {
      *  created at: 2024/1/20
      */
     updateSearchKey(newKey) {
-      this.searchKey = newKey;
-      this.$refs.searchRef.onUpdateFormParent(newKey);
+      this.searchKey = newKey.trim();
+      this.$refs.searchRef.onUpdateFormParent(newKey.trim());
     },
     /**
      * push employee into form for user's change form mode

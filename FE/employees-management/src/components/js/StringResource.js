@@ -1,3 +1,6 @@
+
+const baseApiUrl = "https://localhost:7250";
+
 const MResource = {
 
     // Toast
@@ -77,27 +80,25 @@ const MResource = {
         RefreshToken: "refreshToken"
     },
 
-
-
     // API
     apiData: {
-        login: "https://localhost:7250/api/Authenticate/Login",
-        admin: "https://localhost:7250/api/Admin",
-        getNewAccessToken: "https://localhost:7250/api/Authenticate/RefereshToken",
-        getEmployees: "https://localhost:7250/api/v1/Employee",
-        updateEmployee: "https://localhost:7250/api/v1/Employee",
-        insertEmployee: "https://localhost:7250/api/v1/Employee",
-        deleteEmployee: "https://localhost:7250/api/v1/Employee",
-        getNewEmployeeCode: "https://localhost:7250/api/v1/Employee/NewEmployeeCode",
-        getEmployeesPaging: "https://localhost:7250/api/v1/Employee/Paging?",
-        exportEmployees: "https://localhost:7250/api/v1/Employee/ExportExcelFile?",
-        previewEmployees: "https://localhost:7250/api/v1/Employee/PreviewExcelFile",
-        importEmployees: "https://localhost:7250/api/v1/Employee/ImportExcelFile",
-        deleteEmployeees: "https://localhost:7250/api/v1/Employee/ManyDelete",
-        getTotalEmployeeRecord: "https://localhost:7250/api/v1/Employee/TotalEmployee",
-        getDepartment: "https://localhost:7250/api/v1/Department",
-        getSampleEmployeeExcelFile: "https://localhost:7250/api/v1/Employee/GetSampleExcelFile",
-        getEmployeeImportExcelFileBaseKey: "https://localhost:7250/api/v1/Employee/GetEmployeeExcelFileBaseKey"
+        login: `${baseApiUrl}/api/Authenticate/Login`,
+        admin: `${baseApiUrl}/api/Admin`,
+        getNewAccessToken: `${baseApiUrl}/api/Authenticate/RefereshToken`,
+        getEmployees: `${baseApiUrl}/api/v1/Employee`,
+        updateEmployee: `${baseApiUrl}/api/v1/Employee`,
+        insertEmployee: `${baseApiUrl}/api/v1/Employee`,
+        deleteEmployee: `${baseApiUrl}/api/v1/Employee`,
+        getNewEmployeeCode: `${baseApiUrl}/api/v1/Employee/NewEmployeeCode`,
+        getEmployeesPaging: `${baseApiUrl}/api/v1/Employee/Paging?`,
+        exportEmployees: `${baseApiUrl}/api/v1/Employee/ExportExcelFile?`,
+        previewEmployees: `${baseApiUrl}/api/v1/Employee/PreviewExcelFile`,
+        importEmployees: `${baseApiUrl}/api/v1/Employee/ImportExcelFile`,
+        deleteEmployeees: `${baseApiUrl}/api/v1/Employee/MultipleDelete`,
+        getTotalEmployeeRecord: `${baseApiUrl}/api/v1/Employee/TotalEmployee`,
+        getDepartment: `${baseApiUrl}/api/v1/Department`,
+        getSampleEmployeeExcelFile: `${baseApiUrl}/api/v1/Employee/GetSampleExcelFile`,
+        getEmployeeImportExcelFileBaseKey: `${baseApiUrl}/api/v1/Employee/GetEmployeeExcelFileBaseKey`
     },
     apiMethod: {
         get: "get",

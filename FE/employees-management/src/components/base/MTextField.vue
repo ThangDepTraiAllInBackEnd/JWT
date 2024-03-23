@@ -6,7 +6,7 @@
     >
     <div
       :class="{
-        'm-texfield-err': errMsg !== '',
+        'm-texfield-err': errMsg != '',
         'm-textfield-focus': errMsg === '' && isInputFocused,
         'm-textfield-max-input': maxInput,
         'm-textfield-input': !maxInput,
@@ -80,11 +80,15 @@ export default {
      */
     validateInput(newValue) {
       if (this.type === "date") {
-        var inputDate = new Date(newValue);
-        if (inputDate > new Date()) {
-          this.$emit("update:value", inputDate);
-          this.errMsg = "Ngày không được lớn hơn ngày hiện tại";
-          return this.errMsg;
+        if (this.isRequired) {
+          var inputDate = new Date(newValue);
+          if (inputDate > new Date()) {
+            this.$emit("update:value", inputDate);
+            this.errMsg = "Ngày không được lớn hơn ngày hiện tại";
+            return this.errMsg;
+          }
+        } else {
+          return "";
         }
       } else {
         if (this.isRequired) {
@@ -107,12 +111,7 @@ export default {
         }
         // catched all valid case above when regex || required -> if this code block -> auto not valid
         if (this.regex || this.isRequired) {
-          if (
-            !newValue ||
-            isNaN(newValue) ||
-            newValue === "" ||
-            newValue === null
-          ) {
+          if (!newValue && newValue != "0") {
             this.$emit("update:value", "");
             this.errMsg = this.requiredMsg;
             this.focusInput();
@@ -148,6 +147,11 @@ export default {
       }
     },
   },
+  // watch: {
+  //   inputValue(newData) {
+  //     console.log("watch" + newData);
+  //   },
+  // },
 };
 </script>
 
