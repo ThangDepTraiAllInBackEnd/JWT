@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj": {}
+    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj": {
+    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
+        "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
         "projectName": "CleanArchitecture.Core",
-        "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
+        "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\obj\\",
+        "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -104,14 +104,14 @@
         }
       }
     },
-    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj": {
+    "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
         "projectName": "CleanArchitecture.Infrastructure",
-        "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -128,8 +128,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj": {
-                "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj"
+              "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj": {
+                "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj"
               }
             }
           }

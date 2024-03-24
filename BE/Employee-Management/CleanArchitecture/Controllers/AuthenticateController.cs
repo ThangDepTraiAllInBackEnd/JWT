@@ -81,7 +81,7 @@ namespace CleanArchitecture.Controllers
 						Expiration = token.ValidTo,
 						ExpirationRefreshToken = user.RefreshTokenExpiryTime
 					},
-					MsgResource_VN = Core.Resources.MsgResource_VN.AuthenticateSuccess,
+					DevMsg = Core.Resources.MsgResource_VN.AuthenticateSuccess,
 					UserMsg = Core.Resources.MsgResource_VN.AuthenticateSuccess,
 				});
 			}
@@ -90,7 +90,7 @@ namespace CleanArchitecture.Controllers
 			{
 				Success = false,
 				Code = System.Net.HttpStatusCode.Unauthorized,
-				MsgResource_VN = Core.Resources.MsgResource_VN.CannotAuthorize,
+				DevMsg = Core.Resources.MsgResource_VN.CannotAuthorize,
 				UserMsg = Core.Resources.MsgResource_VN.CannotAuthorize,
 			});
 		}
@@ -114,7 +114,7 @@ namespace CleanArchitecture.Controllers
 				{
 					Success = false,
 					Code = System.Net.HttpStatusCode.BadRequest,
-					MsgResource_VN = Core.Resources.MsgResource_VN.UserAlreadySuccess,
+					DevMsg = Core.Resources.MsgResource_VN.UserAlreadySuccess,
 					UserMsg = Core.Resources.MsgResource_VN.UserAlreadySuccess,
 				}); ;
 
@@ -131,7 +131,7 @@ namespace CleanArchitecture.Controllers
 				{
 					Success = false,
 					Code = System.Net.HttpStatusCode.BadRequest,
-					MsgResource_VN = Core.Resources.MsgResource_VN.UserCreateFailed,
+					DevMsg = Core.Resources.MsgResource_VN.UserCreateFailed,
 					UserMsg = Core.Resources.MsgResource_VN.UserCreateFailed
 				});
 
@@ -140,7 +140,7 @@ namespace CleanArchitecture.Controllers
 			{
 				Success = true,
 				Code = System.Net.HttpStatusCode.Created,
-				MsgResource_VN = Core.Resources.MsgResource_VN.UserCreateSuccess,
+				DevMsg = Core.Resources.MsgResource_VN.UserCreateSuccess,
 				UserMsg = Core.Resources.MsgResource_VN.UserCreateSuccess
 			});
 		}
@@ -164,7 +164,7 @@ namespace CleanArchitecture.Controllers
 				{
 					Success = false,
 					Code = System.Net.HttpStatusCode.BadRequest,
-					MsgResource_VN = Core.Resources.MsgResource_VN.UserAlreadySuccess,
+					DevMsg = Core.Resources.MsgResource_VN.UserAlreadySuccess,
 					UserMsg = Core.Resources.MsgResource_VN.UserAlreadySuccess,
 				}); ;
 
@@ -182,7 +182,7 @@ namespace CleanArchitecture.Controllers
 				{
 					Success = false,
 					Code = System.Net.HttpStatusCode.BadRequest,
-					MsgResource_VN = Core.Resources.MsgResource_VN.UserCreateFailed,
+					DevMsg = Core.Resources.MsgResource_VN.UserCreateFailed,
 					UserMsg = Core.Resources.MsgResource_VN.UserCreateFailed
 				});
 
@@ -204,7 +204,7 @@ namespace CleanArchitecture.Controllers
 			{
 				Success = true,
 				Code = System.Net.HttpStatusCode.Created,
-				MsgResource_VN = Core.Resources.MsgResource_VN.UserCreateSuccess,
+				DevMsg = Core.Resources.MsgResource_VN.UserCreateSuccess,
 				UserMsg = Core.Resources.MsgResource_VN.UserCreateSuccess
 			});
 		}
@@ -258,7 +258,7 @@ namespace CleanArchitecture.Controllers
 					 accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
 					 refreshToken = newRefreshToken
 				 },
-				MsgResource_VN = Core.Resources.MsgResource_VN.TokenCreationSuccess,
+				DevMsg = Core.Resources.MsgResource_VN.TokenCreationSuccess,
 				UserMsg = Core.Resources.MsgResource_VN.TokenCreationSuccess
 			});
 		}

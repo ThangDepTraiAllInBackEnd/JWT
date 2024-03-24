@@ -144,3 +144,13 @@ C:\Users\ASUS\Documents\Misa\JWT\JWT\BE\Employee-Management\CleanArchitecture.Co
 C:\Users\ASUS\Documents\Misa\JWT\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.pdb
 C:\Users\ASUS\Documents\Misa\JWT\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.genruntimeconfig.cache
 C:\Users\ASUS\Documents\Misa\JWT\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\ref\CleanArchitecture.Core.UnitTests.dll
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.csproj.AssemblyReference.cache
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.AssemblyInfoInputs.cache
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.AssemblyInfo.cs
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.sourcelink.json
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.dll
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\refint\CleanArchitecture.Core.UnitTests.dll
+C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\obj\Debug\net6.0\CleanArchitecture.Core.UnitTests.pdb

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6yW61V0WYxKhPbFdSNTEMuoGTh6yZKHEcDcXrCpsAocMJAbDSlP9P4YpKlX/vgFWKkIYKdlE132LQ4C9YZY6+g==",
+  "dgSpecHash": "ijkYG3tj+RByWqxRsSNtCsh9pmuk89zHK01IB1DmRMpkvfsduJeA7C5UNwlmJLIPMPH3t2745xQuKpuvxdcgOw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture\\CleanArchitecture.csproj",
+  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture\\CleanArchitecture.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

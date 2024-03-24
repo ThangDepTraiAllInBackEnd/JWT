@@ -59,22 +59,15 @@ namespace CleanArchitecture.Core.Services
                     Success = true,
                     Code = System.Net.HttpStatusCode.OK,
                     Data = employee,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess
+                    DevMsg = Resources.MsgResource_VN.GetSuccess,
+                    UserMsg = Resources.MsgResource_VN.GetSuccess
                 };
             }
-            else
+            else if (employee == null)
             {
-                return new ServiceResult()
-                {
-                    Success = false,
-                    Code = System.Net.HttpStatusCode.NotFound,
-                    Data = employee,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound
-                };
+                throw new NotFoundCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound);
             }
-            throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.FoundErr);
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.FoundErr);
         }
 
         /// <summary>
@@ -100,20 +93,12 @@ namespace CleanArchitecture.Core.Services
                         Success = true,
                         Code = System.Net.HttpStatusCode.Created,
                         Data = 1,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.AddSuccess,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.AddSuccess
+                        DevMsg = Resources.MsgResource_VN.AddSuccess,
+                        UserMsg = Resources.MsgResource_VN.AddSuccess
                     };
                 }
             }
-            // err insert
-            return new ServiceResult()
-            {
-                Success = false,
-                Code = System.Net.HttpStatusCode.BadRequest,
-                Data = 0,
-                MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.AddErr,
-                UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.AddErr
-            };
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.AddErr);
         }
 
         /// <summary>
@@ -137,23 +122,12 @@ namespace CleanArchitecture.Core.Services
                         Success = true,
                         Code = System.Net.HttpStatusCode.OK,
                         Data = 1,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.UpdateSuccess,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.UpdateSuccess
+                        DevMsg = Resources.MsgResource_VN.UpdateSuccess,
+                        UserMsg = Resources.MsgResource_VN.UpdateSuccess
                     };
                 }
             }
-            else
-            {
-                return new ServiceResult()
-                {
-                    Success = false,
-                    Code = System.Net.HttpStatusCode.NotFound,
-                    Data = 0,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound
-                };
-            }
-            throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.UpdateErr);
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.UpdateErr);
         }
 
         /// <summary>
@@ -179,24 +153,16 @@ namespace CleanArchitecture.Core.Services
                         Success = true,
                         Code = System.Net.HttpStatusCode.OK,
                         Data = 1,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.DeleteSucess,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.DeleteSucess,
+                        DevMsg = Resources.MsgResource_VN.DeleteSucess,
+                        UserMsg = Resources.MsgResource_VN.DeleteSucess,
                     };
                 }
             }
             else if (employeeInDb == null)
             {
-                return new ServiceResult()
-                {
-                    Success = false,
-                    Code = System.Net.HttpStatusCode.NotFound,
-                    Data = 0,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound
-                };
-
+                throw new NotFoundCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound);
             }
-            throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.DeleteErr);
+            throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.DeleteErr);
         }
 
         #region Before action
@@ -210,24 +176,23 @@ namespace CleanArchitecture.Core.Services
         /// </returns>
         ///  created by: Nguyễn Thiện Thắng
         ///  created at: 2024/1/9
-        ///  
         public async override Task<bool> BeforeInsertAsync(Employee employee)
         {
             Employee employeeInDb = await _employeeRepository.GetByIdAsync(employee.EmployeeId);
             // is employeeId exist -> cannot insert
             if (employeeInDb != null)
             {
-                return false;
+                throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeIdAlreadyExist);
             }
             // is employeeCode exist -> cannot insert
             if (await _employeeRepository.IsEmployeeCodeExistAsync(employee.EmployeeCode))
             {
-                throw new ValidateExeption($"{Resources.MsgResource_VN.EmpCodeDoNotExistFront}{employee.EmployeeCode}{Resources.MsgResource_VN.EmpCodeDoNotExistBack}");
+                throw new BadRequestCustomException($"{Resources.MsgResource_VN.EmpCodeDoNotExistFront}{employee.EmployeeCode}{Resources.MsgResource_VN.EmpCodeDoNotExistBack}");
             }
             // employee name null-> cannot insert
-            if (employee.EmployeeName == null || employee.EmployeeName == "")
+            if (String.IsNullOrEmpty(employee.EmployeeName))
             {
-                throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNameCannotBeNull);
+                throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNameCannotBeNull);
             }
             return true;
         }
@@ -244,12 +209,11 @@ namespace CleanArchitecture.Core.Services
         ///  created at: 2024/1/9
         public async override Task<bool> BeforeUpdateAsync(Employee employee)
         {
-
             Employee employeeInDb = await _employeeRepository.GetByIdAsync(employee.EmployeeId);
             // entity doesn't exist
             if (employeeInDb == null)
             {
-                return false;
+                throw new NotFoundCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound);
             }
             // Code exit -> Check to see if this Code belongs to the employee who is editing 
             // true -> update | false -> throw duplicate Code exeption
@@ -257,10 +221,9 @@ namespace CleanArchitecture.Core.Services
             {
                 if (employee.EmployeeCode != employeeInDb.EmployeeCode)
                 {
-                    throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeDoNotExist);
+                    throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeCodeDuplicate);
                 }
             }
-
             return true;
         }
         #endregion
@@ -282,11 +245,12 @@ namespace CleanArchitecture.Core.Services
                     Success = true,
                     Code = HttpStatusCode.OK,
                     Data = "NV-000000",
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess
+                    DevMsg = Resources.MsgResource_VN.GetSuccess,
+                    UserMsg = Resources.MsgResource_VN.GetSuccess
                 };
             }
-            string numberPart = currentCode.Substring(3);
+            //get last six characters
+            string numberPart = currentCode.Substring(Math.Max(0, currentCode.Length - 6));
             // get prefix
             string prefix = currentCode.Substring(0, currentCode.Length - numberPart.Length);
             if (int.TryParse(numberPart, out int currentNumber))
@@ -301,11 +265,11 @@ namespace CleanArchitecture.Core.Services
                     Success = true,
                     Code = HttpStatusCode.OK,
                     Data = newEmployeeCode,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess
+                    DevMsg = Resources.MsgResource_VN.GetSuccess,
+                    UserMsg = Resources.MsgResource_VN.GetSuccess
                 };
             }
-            throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
         }
         /// <summary>
         /// Paging records base page, pageSize and search key
@@ -321,7 +285,7 @@ namespace CleanArchitecture.Core.Services
             // page have to > 0
             if (page < 1)
             {
-                throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.PagingErr);
+                throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.PagingErr);
             }
             List<Employee> pagingList = await _employeeRepository.PagingAsync((page - 1) * pageSize, pageSize, key);
             if (pagingList.Count >= 0)
@@ -341,61 +305,48 @@ namespace CleanArchitecture.Core.Services
                     },
                     Success = true,
                     Code = System.Net.HttpStatusCode.OK,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.GetSuccess
+                    DevMsg = Resources.MsgResource_VN.GetSuccess,
+                    UserMsg = Resources.MsgResource_VN.GetSuccess
                 };
             }
-            return new ServiceResult()
-            {
-                Data = null,
-                Success = false,
-                Code = System.Net.HttpStatusCode.BadGateway,
-                MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.GetErr,
-                UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.GetErr
-            };
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.GetErr);
         }
 
         /// <summary>
         /// Delete employess by EmployeeId list
         /// </summary>
-        /// <param name="employees">Employee list to delete</param>
+        /// <param name="employeesId">Employee id list to delete</param>
         /// <returns>Serivce result ( sucsess with data or failed with all details )</returns>	
         ///  created by: Nguyễn Thiện Thắng
         ///  created at: 2024/1/9
-        public async Task<ServiceResult> DeleteManyAsync(List<Employee> employees)
+        public async Task<ServiceResult> MultipleDeleteAsync(List<Guid?> employeesId)
         {
             // empty list
-            if (employees.Count == 0 || employees == null)
+            if (employeesId.Count == 0 || employeesId == null)
             {
-                throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.EmptyEmployeeList);
+                throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmptyEmployeeList);
             }
             int countDelete = 0;
             _unitOfWork.BeginTransaction();
             // loop form the first employee to the last employee, get Id and delete
-            foreach (Employee employee in employees)
+            foreach (Guid? id in employeesId)
             {
                 // employee exist -> can be delete
-                if (await _employeeRepository.GetByIdAsync(employee.EmployeeId) != null)
+                var employee = await _unitOfWork.Employee.GetByIdAsync(id);
+                if (employee != null)
                 {
                     // delete success
-                    if (await _employeeRepository.DeleteAsync(employee) > 0)
+                    if (await _unitOfWork.Employee.DeleteAsync(employee) <= 0)
                     {
-                        countDelete++;
+                        _unitOfWork.RollBack();
+                        throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.DeleteErr);
                     }
-                    else
-                    {
-                        throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.DeleteErr);
-                    }
+                    countDelete++;
                 }
                 else
                 {
-                    throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound);
+                    throw new NotFoundCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeNotFound);
                 }
-            }
-            // lack delete -> not commit -> show error
-            if (countDelete != employees.Count)
-            {
-                throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
             }
             // commit delete
             _unitOfWork.Commit();
@@ -404,7 +355,7 @@ namespace CleanArchitecture.Core.Services
                 Success = true,
                 Code = System.Net.HttpStatusCode.OK,
                 Data = countDelete,
-                UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.DeleteSucess
+                UserMsg = Resources.MsgResource_VN.DeleteSucess
             };
         }
 
@@ -418,7 +369,7 @@ namespace CleanArchitecture.Core.Services
         ///  <param name="importKey">key to import if data mode = 2 </param>
         ///  <param name="dataMode">data resource
         ///  1 - From DataBase
-        ///  2 - Form cacche (EmployeeImp)
+        ///  2 - Form cache (EmployeeImport)
         /// <returns>Service result ( sucsess or failed with all details )</returns>
         ///  created by: Nguyễn Thiện Thắng
         ///  created at: 2024/15/1
@@ -438,7 +389,6 @@ namespace CleanArchitecture.Core.Services
                     employees = _cacheRepository.GetCache<List<EmployeeImport>>(importKey);
                 }
 
-
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 // create an excel file
                 using (ExcelPackage package = new ExcelPackage())
@@ -452,7 +402,6 @@ namespace CleanArchitecture.Core.Services
                     titleRange.Merge = true;
                     titleRange.Value = Resources.CommonRs.EmployeeFileHeader;
                     titleRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-
 
                     using (ExcelRange rng = worksheet.Cells["A1:I1"])
                     {
@@ -502,26 +451,24 @@ namespace CleanArchitecture.Core.Services
                         worksheet.Cells[row, 7].Value = employee.DepartmentName;
                         worksheet.Cells[row, 8].Value = employee.BankAccount;
                         worksheet.Cells[row, 9].Value = employee.BankName;
-                        if (dataMode != 1)
+                        if (dataMode == 2)
                         {
                             worksheet.Cells[3, 10].Value = "Trạng thái";
                             worksheet.Cells[3, 10].Style.Fill.PatternType = ExcelFillStyle.Solid;
                             worksheet.Cells[3, 10].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
-                            StringBuilder errorText = new StringBuilder();
+
                             if (employee.ErrorList.Count > 0)
                             {
-
+                                string errorText = string.Empty;
                                 foreach (var error in employee.ErrorList)
                                 {
-                                    errorText.AppendLine("- " + error);
-                                    errorText.Append("\n\n");
+                                    errorText += "- " + error + "\n\n";
                                 }
-                                worksheet.Cells[row, 10].Value = errorText.ToString();
+                                worksheet.Cells[row, 10].Value = errorText;
                             }
                             else
                             {
-                                errorText.AppendLine("Hợp Lệ");
-                                worksheet.Cells[row, 10].Value = errorText.ToString();
+                                worksheet.Cells[row, 10].Value = "Hợp Lệ";
                             }
                         }
                         row++;
@@ -543,14 +490,14 @@ namespace CleanArchitecture.Core.Services
                         Success = true,
                         Code = HttpStatusCode.OK,
                         Data = excelData,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.UpLoadFailed,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.UpLoadFailed
+                        DevMsg = Resources.MsgResource_VN.UpLoadFailed,
+                        UserMsg = Resources.MsgResource_VN.UpLoadFailed
                     });
                 }
             }
             catch (Exception ex)
             {
-                throw new ValidateExeption(ex.Message);
+                throw new BadRequestCustomException(ex.Message);
             }
         }
 
@@ -565,191 +512,161 @@ namespace CleanArchitecture.Core.Services
         {
             if (excelFile == null || excelFile.Length == 0)
             {
-                return new ServiceResult()
-                {
-                    Success = false,
-                    Code = System.Net.HttpStatusCode.BadRequest,
-                    Data = null,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.FileNotValid,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.FileNotValid,
-                };
+                throw new BadRequestCustomException(Resources.MsgResource_VN.FileNotValid);
             }
 
             // Check file extension
-            string fileExtension = Path.GetExtension(excelFile.FileName);
-            if (fileExtension != ".xlsx")
+            string fileName = excelFile.FileName;
+            if (Path.GetExtension(fileName) != ".xlsx")
             {
-                return new ServiceResult()
-                {
-                    Success = false,
-                    Code = System.Net.HttpStatusCode.BadRequest,
-                    Data = null,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-                };
+                throw new BadRequestCustomException(Resources.MsgResource_VN.EmployeeFile_FileWrongFormat);
             }
-            try
+
+            var filePath = Path.Combine(Resources.CommonRs.UploadFolderName, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                var filePath = Path.Combine(Resources.CommonRs.UploadFolderName, excelFile.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await excelFile.CopyToAsync(stream);
-                }
-                // file exist
-                if (File.Exists(filePath))
-                {
-                    List<EmployeeImport> employeesImport = new List<EmployeeImport>();
-                    List<Employee> validEmployees = new();
-                    List<EmployeeImport> invalidEmployees = new();
-                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                await excelFile.CopyToAsync(stream);
+            }
+            // file exist
+            if (File.Exists(filePath))
+            {
+                List<EmployeeImport> employeesImport = new();
+                List<Employee> validEmployees = new();
+                List<EmployeeImport> invalidEmployees = new();
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-                    using (var package = new ExcelPackage(new FileInfo(filePath)))
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    var worksheet = package.Workbook.Worksheets[0];
+                    var rowCount = worksheet.Dimension.Rows;
+
+                    string[] expectedHeaders = { "STT", "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Chức danh", "Tên đơn vị", "Số tài khoản", "Tên ngân hàng" };
+                    // check headers title are match with Demo file or not
+                    for (int i = 0; i < expectedHeaders.Length; i++)
                     {
-                        var worksheet = package.Workbook.Worksheets[0];
-                        var rowCount = worksheet.Dimension.Rows;
-
-                        string[] expectedHeaders = { "STT", "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Chức danh", "Tên đơn vị", "Số tài khoản", "Tên ngân hàng" };
-                        // check headers title are match with Demo file or not
-                        for (int i = 0; i < expectedHeaders.Length; i++)
+                        // not match -> throw exption
+                        if (worksheet.Cells[3, i + 1].Value?.ToString()?.Trim() != expectedHeaders[i])
                         {
-                            // not match -> throw exption
-                            if (worksheet.Cells[3, i + 1].Value?.ToString()?.Trim() != expectedHeaders[i])
-                            {
-                                throw new ValidateExeption(Resources.MsgResource_VN.EmployeeFile_FileNotValid);
-                            }
+                            throw new BadRequestCustomException(Resources.MsgResource_VN.EmployeeFile_FileNotValid);
                         }
-                        if (!string.IsNullOrWhiteSpace(worksheet.Cells[3, 10].Value?.ToString()))
-                        {
-                            throw new ValidateExeption(Resources.MsgResource_VN.EmployeeFile_FileNotValid);
-                        }
-                        _unitOfWork.BeginTransaction();
-
-                        for (int row = 4; row <= rowCount; row++)
-                        {
-                            EmployeeImport employeeImport = new EmployeeImport();
-                            employeeImport.EmployeeCode = worksheet.Cells[row, 2].Value?.ToString()?.Trim();
-                            employeeImport.EmployeeName = worksheet.Cells[row, 3].Value?.ToString()?.Trim();
-
-                            switch (worksheet.Cells[row, 4].Value?.ToString()?.Trim().ToLower())
-                            {
-                                case "nam":
-                                    employeeImport.Gender = 0;
-                                    break;
-                                case "nữ":
-                                    employeeImport.Gender = 1;
-                                    break;
-                                case "khác":
-                                    employeeImport.Gender = 2;
-                                    break;
-                                default:
-                                    employeeImport.Gender = null;
-                                    break;
-                            }
-
-                            employeeImport.PositionName = worksheet.Cells[row, 6].Value?.ToString()?.Trim();
-                            employeeImport.DepartmentName = worksheet.Cells[row, 7].Value?.ToString()?.Trim();
-                            employeeImport.BankAccount = worksheet.Cells[row, 8].Value?.ToString()?.Trim();
-                            employeeImport.BankName = worksheet.Cells[row, 9].Value?.ToString()?.Trim();
-                            // data is valid -> accept
-                            if (double.TryParse(worksheet.Cells[row, 5].Value?.ToString()?.Trim(), out double excelDate))
-                            {
-                                DateTime dateOfBirth = DateTime.FromOADate(excelDate);
-                                employeeImport.BirthDate = dateOfBirth;
-                            }
-
-                            //employyee name is required
-                            if (string.IsNullOrEmpty(employeeImport.EmployeeName))
-                            {
-                                employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFIle_NameIsRequired);
-                            }
-                            // employee Code is required
-                            if (string.IsNullOrEmpty(employeeImport.EmployeeCode))
-                            {
-                                employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_EmployeeCodeCanNotBeNull);
-                            }
-                            // employeecode duplicate -> err
-                            else if (await _unitOfWork.Employee.IsEmployeeCodeExistAsync(employeeImport.EmployeeCode))
-                            {
-                                employeeImport.ErrorList.Add($"{Resources.MsgResource_VN.EmpCodeDoNotExistFront}" +
-                                                            $"{employeeImport.EmployeeCode}" +
-                                                            $"{Resources.MsgResource_VN.EmpCodeDoNotExistBack}");
-                            }
-
-                            // department name is required
-                            if (string.IsNullOrEmpty(employeeImport.DepartmentName))
-                            {
-                                employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_DepartmentNameIsRequired);
-                            }
-                            else
-                            {
-                                Department department = await _unitOfWork.Department.GetByDepartmentNameAsync(employeeImport.DepartmentName);
-                                // check is department name is exist or not
-                                if (department != null)
-                                {
-                                    employeeImport.DepartmentName = department.DepartmentName;
-                                    employeeImport.DepartmentId = department.DepartmentId;
-                                }
-                                else
-                                {
-                                    employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_DepartmentNotValid);
-                                }
-                            }
-                            employeeImport.IsEmployeeValid = employeeImport.ErrorList.Count == 0;
-                            // employee valid 
-                            if ((bool)employeeImport.IsEmployeeValid)
-                            {
-                                Employee employee = _mapper.Map<Employee>(employeeImport);
-                                validEmployees.Add(employee);
-                            }
-                            else
-                            {
-                                invalidEmployees.Add(employeeImport);
-                            }
-                            employeesImport.Add(employeeImport);
-                        }
-                        TimeSpan timeSpan = TimeSpan.FromMinutes(30);
-                        // key for valid list
-                        var validToImportCacheKey = Guid.NewGuid().ToString();
-                        // key for error list
-                        var invalidEmployeeCacheKey = Guid.NewGuid().ToString();
-                        // key for both
-                        var employeeImportCacheKey = Guid.NewGuid().ToString();
-                        _cacheRepository.SetCache<List<EmployeeImport>>(invalidEmployeeCacheKey, invalidEmployees, timeSpan);
-                        _cacheRepository.SetCache<List<EmployeeImport>>(employeeImportCacheKey, employeesImport, timeSpan);
-                        _cacheRepository.SetCache<List<Employee>>(validToImportCacheKey, validEmployees, timeSpan);
-                        return new ServiceResult()
-                        {
-                            Success = true,
-                            Code = System.Net.HttpStatusCode.OK,
-                            Data = new
-                            {
-                                employeesImport = employeesImport,
-                                validToImportCacheKey = validToImportCacheKey,
-                                invalidEmployeeCacheKey = invalidEmployeeCacheKey,
-                                employeeImportCacheKey = employeeImportCacheKey,
-                            },
-                            MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.UploadSuccess,
-                            UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.UploadSuccess,
-                        };
                     }
-                }
-                // updload failed
-                else
-                {
+                    if (!string.IsNullOrWhiteSpace(worksheet.Cells[3, 10].Value?.ToString()))
+                    {
+                        throw new BadRequestCustomException(Resources.MsgResource_VN.EmployeeFile_FileNotValid);
+                    }
+                    for (int row = 4; row <= rowCount; row++)
+                    {
+                        EmployeeImport employeeImport = new EmployeeImport();
+                        employeeImport.EmployeeCode = worksheet.Cells[row, 2].Value?.ToString()?.Trim();
+                        employeeImport.EmployeeName = worksheet.Cells[row, 3].Value?.ToString()?.Trim();
+
+                        switch (worksheet.Cells[row, 4].Value?.ToString()?.Trim().ToLower())
+                        {
+                            case "nam":
+                                employeeImport.Gender = 0;
+                                break;
+                            case "nữ":
+                                employeeImport.Gender = 1;
+                                break;
+                            case "khác":
+                                employeeImport.Gender = 2;
+                                break;
+                            default:
+                                employeeImport.Gender = null;
+                                break;
+                        }
+
+                        employeeImport.PositionName = worksheet.Cells[row, 6].Value?.ToString()?.Trim();
+                        employeeImport.DepartmentName = worksheet.Cells[row, 7].Value?.ToString()?.Trim();
+                        employeeImport.BankAccount = worksheet.Cells[row, 8].Value?.ToString()?.Trim();
+                        employeeImport.BankName = worksheet.Cells[row, 9].Value?.ToString()?.Trim();
+                        // data is valid -> accept
+                        if (double.TryParse(worksheet.Cells[row, 5].Value?.ToString()?.Trim(), out double excelDate))
+                        {
+                            DateTime dateOfBirth = DateTime.FromOADate(excelDate);
+                            employeeImport.BirthDate = dateOfBirth;
+                        }
+                        //employyee name is required
+                        if (string.IsNullOrEmpty(employeeImport.EmployeeName))
+                        {
+                            employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFIle_NameIsRequired);
+                        }
+                        // employee Code is required
+                        if (string.IsNullOrEmpty(employeeImport.EmployeeCode))
+                        {
+                            employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_EmployeeCodeCanNotBeNull);
+                        }
+                        // employeecode duplicate -> err
+                        else if (await _unitOfWork.Employee.IsEmployeeCodeExistAsync(employeeImport.EmployeeCode))
+                        {
+                            employeeImport.ErrorList.Add($"{Resources.MsgResource_VN.EmpCodeDoNotExistFront}" +
+                                                        $"{employeeImport.EmployeeCode}" +
+                                                        $"{Resources.MsgResource_VN.EmpCodeDoNotExistBack}");
+                        }
+
+                        // department name is required
+                        if (string.IsNullOrEmpty(employeeImport.DepartmentName))
+                        {
+                            employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_DepartmentNameIsRequired);
+                        }
+                        else
+                        {
+                            Department department = await _unitOfWork.Department.GetByDepartmentNameAsync(employeeImport.DepartmentName);
+                            // check is department is exist or not
+                            if (department != null)
+                            {
+                                employeeImport.DepartmentId = department.DepartmentId;
+                            }
+                            else
+                            {
+                                employeeImport.ErrorList.Add(Resources.MsgResource_VN.EmployeeFile_DepartmentNotValid);
+                            }
+                        }
+                        employeeImport.IsEmployeeValid = employeeImport.ErrorList.Count == 0;
+                        // employee valid 
+                        if ((bool)employeeImport.IsEmployeeValid)
+                        {
+                            Employee employee = _mapper.Map<Employee>(employeeImport);
+                            validEmployees.Add(employee);
+                        }
+                        else
+                        {
+                            invalidEmployees.Add(employeeImport);
+                        }
+                        employeesImport.Add(employeeImport);
+                    }
+                    TimeSpan timeSpan = TimeSpan.FromMinutes(30);
+                    // key for valid list
+                    var validToImportCacheKey = Guid.NewGuid().ToString();
+                    // key for error list
+                    var invalidEmployeeCacheKey = Guid.NewGuid().ToString();
+                    // key for both
+                    var employeeImportCacheKey = Guid.NewGuid().ToString();
+                    _cacheRepository.SetCache<List<EmployeeImport>>(invalidEmployeeCacheKey, invalidEmployees, timeSpan);
+                    _cacheRepository.SetCache<List<EmployeeImport>>(employeeImportCacheKey, employeesImport, timeSpan);
+                    _cacheRepository.SetCache<List<Employee>>(validToImportCacheKey, validEmployees, timeSpan);
                     return new ServiceResult()
                     {
-                        Success = false,
-                        Code = System.Net.HttpStatusCode.BadRequest,
-                        Data = null,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
+                        Success = true,
+                        Code = System.Net.HttpStatusCode.OK,
+                        Data = new
+                        {
+                            employeesImport = employeesImport,
+                            validToImportCacheKey = validToImportCacheKey,
+                            invalidEmployeeCacheKey = invalidEmployeeCacheKey,
+                            employeeImportCacheKey = employeeImportCacheKey,
+                        },
+                        DevMsg = Resources.MsgResource_VN.UploadSuccess,
+                        UserMsg = Resources.MsgResource_VN.UploadSuccess,
                     };
                 }
             }
-            catch (Exception ex)
+            // updload failed
+            else
             {
-                throw new ValidateExeption(ex.Message);
+                throw new BadRequestCustomException(Resources.MsgResource_VN.EmployeeFile_FileWrongFormat);
             }
+
         }
 
         /// <summary>
@@ -765,54 +682,28 @@ namespace CleanArchitecture.Core.Services
             if (_cacheRepository.IsCacheExist(key))
             {
                 List<Employee> employeeList = _cacheRepository.GetCache<List<Employee>>(key);
-                int countInsert = 0;
                 _unitOfWork.BeginTransaction();
-                try
+                // insert all valid employee
+                foreach (Employee employee in employeeList)
                 {
-                    // insert all valid employee
-                    foreach (Employee employee in employeeList)
+                    employee.EmployeeId = Guid.NewGuid();
+                    if (await _unitOfWork.Employee.InsertAsync(employee) <= 0)
                     {
-                        employee.EmployeeId = Guid.NewGuid();
-                        if (await _unitOfWork.Employee.InsertAsync(employee) > 0)
-                        {
-                            countInsert++;
-                        }
-                        else
-                        {
-                            throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
-                        }
+                        _unitOfWork.RollBack();
+                        throw new BadRequestCustomException(Resources.MsgResource_VN.CommonErrr);
                     }
-                    // all employee is insert success
-                    if (countInsert == employeeList.Count)
-                    {
-                        _unitOfWork.Commit();
-                    }
-                    else
-                    {
-                        throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
-                    }
-                    return new ServiceResult()
-                    {
-                        Success = true,
-                        Code = System.Net.HttpStatusCode.Created,
-                        Data = employeeList.Count,
-                        MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.AddSuccess,
-                        UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.AddSuccess,
-                    };
                 }
-                catch (Exception ex)
+                _unitOfWork.Commit();
+                return new ServiceResult()
                 {
-                    throw new ValidateExeption(ex.Message);
-                }
+                    Success = true,
+                    Code = System.Net.HttpStatusCode.Created,
+                    Data = employeeList.Count,
+                    DevMsg = Resources.MsgResource_VN.AddSuccess,
+                    UserMsg = Resources.MsgResource_VN.AddSuccess,
+                };
             }
-            return new ServiceResult()
-            {
-                Success = false,
-                Code = System.Net.HttpStatusCode.BadRequest,
-                Data = null,
-                MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-                UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-            };
+            throw new InternalServerErrorCustomException(Resources.MsgResource_VN.CommonErrr);
         }
         #endregion
 
@@ -833,15 +724,11 @@ namespace CleanArchitecture.Core.Services
                     Code = System.Net.HttpStatusCode.OK,
                     Data = totalRecord,
                     UserMsg = Resources.MsgResource_VN.GetSuccess,
-                    MsgResource_VN = Resources.MsgResource_VN.GetSuccess,
+                    DevMsg = Resources.MsgResource_VN.GetSuccess,
                 };
             }
-            else
-            {
-                throw new ValidateExeption(Resources.MsgResource_VN.GetErr);
-            }
+            throw new InternalServerErrorCustomException(Resources.MsgResource_VN.GetErr);
         }
-
 
         /// <summary>
         /// Get sample excelfile to import employee
@@ -864,29 +751,19 @@ namespace CleanArchitecture.Core.Services
                 {
                     { "FileBytes", fileBytes },
                     { "FileName", fileName }
-
                 };
                 return await Task.FromResult(new ServiceResult
                 {
                     Success = true,
                     Code = HttpStatusCode.OK,
                     Data = excelData,
-                    MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.UpLoadFailed,
-                    UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.UpLoadFailed
+                    DevMsg = Resources.MsgResource_VN.UpLoadFailed,
+                    UserMsg = Resources.MsgResource_VN.UpLoadFailed
                 });
             }
             // errr
-            return new ServiceResult()
-            {
-                Success = false,
-                Code = System.Net.HttpStatusCode.BadRequest,
-                Data = null,
-                MsgResource_VN = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-                UserMsg = CleanArchitecture.Core.Resources.MsgResource_VN.EmployeeFile_FileWrongFormat,
-            };
-
+            throw new InternalServerErrorCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.CommonErrr);
         }
-
     }
 }
 

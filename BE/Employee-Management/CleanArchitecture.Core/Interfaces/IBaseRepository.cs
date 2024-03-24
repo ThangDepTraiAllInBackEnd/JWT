@@ -40,21 +40,21 @@ namespace CleanArchitecture.Core.Interfaces
 		///  created by: Nguyễn Thiện Thắng
 		///  created at: 2023/12/2
 		Task<int> UpdateAsync(T entity);
-		/// <summary>
-		///  Delete entity by Id
-		/// </summary>
-		/// <param name="entity">Entity to Delete </param>
-		/// <returns>nummber of record affected</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2023/12/2
-		Task<int> DeleteAsync(T entity);
-		/// <summary>
-		///  Delete all record in an table
-		/// </summary>
-		/// <returns>nummber of record affected</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2023/12/2
-		Task<int> DeleteAllAsync();
+        /// <summary>
+        ///  Delete entity by Id
+        /// </summary>
+        /// <param name="entity">Entity to Delete </param>
+        /// <returns>nummber of record affected</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2023/12/2
+        Task<int> DeleteAsync(T entity);
+        /// <summary>
+        ///  Delete all record in an table
+        /// </summary>
+        /// <returns>nummber of record affected</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2023/12/2
+        Task<int> DeleteAllAsync();
 		/// <summary>
 		///  Get recoreds to paging by offset and next
 		/// </summary>

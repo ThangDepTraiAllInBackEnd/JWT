@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Core.Exeptions
 {
-	public class ValidateExeption : Exception
+	public class BadRequestCustomException : Exception
 	{
 		private string MsgError = string.Empty;
-		public ValidateExeption(string error)
+		public BadRequestCustomException(string error)
 		{
 			this.MsgError = error;
 		}

@@ -268,7 +268,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			EmployeeRepository.GetByIdAsync(employee.EmployeeId).Returns(notExistEmployee);
 			EmployeeRepository.IsEmployeeCodeExistAsync(employee.EmployeeCode).Returns(true);
 			EmployeeService.When(substituteCall: x => x.BeforeInsertAsync(Arg.Any<Employee>())).CallBase();
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.BeforeInsertAsync(employee));
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.BeforeInsertAsync(employee));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo($"{Resources.MsgResource_VN.EmpCodeDoNotExistFront}{employee.EmployeeCode}{Resources.MsgResource_VN.EmpCodeDoNotExistBack}"));
 		}
@@ -289,7 +289,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			EmployeeRepository.GetByIdAsync(employee.EmployeeId).Returns(notExistEmployee);
 			EmployeeRepository.IsEmployeeCodeExistAsync(employee.EmployeeCode).Returns(false);
 			EmployeeService.When(substituteCall: x => x.BeforeInsertAsync(Arg.Any<Employee>())).CallBase();
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.BeforeInsertAsync(employee));
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.BeforeInsertAsync(employee));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.EmployeeNameCannotBeNull));
 		}
@@ -358,7 +358,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			EmployeeRepository.GetByIdAsync(employee.EmployeeId).Returns(employeeInDb);
 			EmployeeRepository.IsEmployeeCodeExistAsync(employee.EmployeeCode).Returns(true);
 			EmployeeService.When(substituteCall: x => x.BeforeUpdateAsync(Arg.Any<Employee>())).CallBase();
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.BeforeUpdateAsync(employee));
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.BeforeUpdateAsync(employee));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.EmployeeDoNotExist));
 		}
@@ -411,7 +411,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			//act 
 			EmployeeService.When(substituteCall: x => x.PagingServiceAsync(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<string>())).CallBase();
 
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.PagingServiceAsync
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.PagingServiceAsync
 			(currentPage, pageSize, searchKey));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.PagingErr));
@@ -453,7 +453,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 		{
 			//arrange
 			List<Employee> deleteEmployees = new List<Employee>();
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.DeleteManyAsync
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.MultipleDeleteAsync
 		(deleteEmployees));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.EmptyEmployeeList));
@@ -473,7 +473,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			deleteEmployees.Add(new Employee());
 			EmployeeRepository.GetByIdAsync(deleteEmployees[0].EmployeeId).Returns(deleteEmployees[0]);
 			EmployeeRepository.DeleteAsync(deleteEmployees[0]).Returns(1);
-			var result = await EmployeeService.DeleteManyAsync(deleteEmployees);
+			var result = await EmployeeService.MultipleDeleteAsync(deleteEmployees);
 			// assert
 			Assert.That(result.Success == true);
 		}
@@ -492,7 +492,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			deleteEmployees.Add(new Employee());
 			EmployeeRepository.GetByIdAsync(deleteEmployees[0].EmployeeId).Returns(deleteEmployees[0]);
 			EmployeeRepository.DeleteAsync(deleteEmployees[0]).Returns(0);
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.DeleteManyAsync
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.MultipleDeleteAsync
 		(deleteEmployees));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.DeleteErr));
@@ -513,7 +513,7 @@ namespace CleanArchitecture.Core.UnitTests.Services
 			Employee notFoundEmployee = null;
 			EmployeeRepository.GetByIdAsync(deleteEmployees[0].EmployeeId).Returns(notFoundEmployee);
 			EmployeeRepository.DeleteAsync(deleteEmployees[0]).Returns(0);
-			var ex = Assert.ThrowsAsync<ValidateExeption>(async () => await EmployeeService.DeleteManyAsync
+			var ex = Assert.ThrowsAsync<BadRequestCustomException>(async () => await EmployeeService.MultipleDeleteAsync
 		(deleteEmployees));
 			// assert
 			Assert.That(ex.Message, Is.EqualTo(Resources.MsgResource_VN.EmployeeNotFound));

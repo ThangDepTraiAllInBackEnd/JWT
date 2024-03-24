@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3U9D2QjJSix6Lb8ERXV1Axe2lAYO3uzAbhSeGTycasX3NgPKNWVSgzsZ2iwI1XooznzEkG1ooC22FcbzclzGrw==",
+  "dgSpecHash": "AInLK85bJnJEbaqxQx3JXKSpo7z4uXX0AEEubEBtO1TacTXqRLTvs850iSNbgvAK9aKO2rVlHn7rwJg27IVeeA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Infrastructure\\CleanArchitecture.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\dapper\\2.1.24\\dapper.2.1.24.nupkg.sha512",

@@ -34,7 +34,7 @@ namespace CleanArchitecture.Controllers
 			var res = await _departmentRepository.GetAllAsync();
 			if (res == null)
 			{
-				throw new ValidateExeption(CleanArchitecture.Core.Resources.MsgResource_VN.GetErr);
+				throw new BadRequestCustomException(CleanArchitecture.Core.Resources.MsgResource_VN.GetErr);
 			}
 			if (res.Count == 0)
 			{

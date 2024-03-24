@@ -13,13 +13,10 @@ import { layoutRouter } from "@/main";
     * created at: 2024/1/20
     */
 export function handleErr(error, type, emitter) {
-    console.log(error);
     if (type === MResource.ErrorType.misa) {
-        console.log("misa");
         let errMsg = error.data.UserMsg;
         switch (error.data.Code) {
             case 400:
-                console.log("400");
                 emitter.emit(
                     MResource.Event.TogleDialog,
                     [errMsg],
@@ -52,7 +49,6 @@ export function handleErr(error, type, emitter) {
         }
         // err form browser
     } else {
-        console.log("browser");
         //get browser's error message
         let errMsg;
         if (error.response && error.response.data && error.response.data.UserMsg) {
@@ -63,7 +59,6 @@ export function handleErr(error, type, emitter) {
         if (error?.response?.status) {
             switch (error.response.status) {
                 case 400:
-                    console.log("400");
                     emitter.emit(
                         MResource.Event.TogleDialog,
                         [errMsg],
@@ -235,14 +230,8 @@ export async function apiFileHandle(method, apiUrl, emitter, data, token) {
                     }
                 );
                 emitter.emit(MResource.Event.TogleLoading, false);
-                if (!response.data.Success) {
-                    handleErr(response, MResource.ErrorType.misa, emitter);
-                } else {
-                    return response
-                }
-                break;
+                return response;
             }
-
             case MResource.apiMethod.post: {
                 const response = await axios.post(
                     apiUrl,

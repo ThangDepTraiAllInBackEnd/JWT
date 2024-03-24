@@ -33,23 +33,23 @@ namespace CleanArchitecture.Core.Interfaces
 		///  created by: Nguyễn Thiện Thắng
 		///  created at: 2023/12/2
 		Task<ServiceResult> UpdateServiceAsync(T entity);
-		/// <summary>
-		/// Check is all entity' properies is valid -> delete
-		/// </summary>
-		/// <param name="entity">Entity to check </param>
-		/// <returns>Service result ( sucsess or failed with all details )</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2023/12/2
-		Task<ServiceResult> DeleteServiceAsync(T entity);
-		/// <summary>
-		/// Paging records base page and pageSize
-		/// </summary>
-		/// <param name="page">Current page </param>
-		///  <param name="pageSize">record'number /page </param>
-		///  <param name="key">search key </param>
-		/// <returns>Service result ( sucsess or failed with all details )</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2024/15/1
-		Task<ServiceResult> PagingServiceAsync(int page, int pageSize, string key);
+        /// <summary>
+        /// Check is all entity' properies is valid -> delete
+        /// </summary>
+        /// <param name="entity">Entity to check </param>
+        /// <returns>Service result ( sucsess or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2023/12/2
+        Task<ServiceResult> DeleteServiceAsync(T entity);
+        /// <summary>
+        /// Paging records base page and pageSize
+        /// </summary>
+        /// <param name="page">Current page </param>
+        ///  <param name="pageSize">record'number /page </param>
+        ///  <param name="key">search key </param>
+        /// <returns>Service result ( sucsess or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/15/1
+        Task<ServiceResult> PagingServiceAsync(int page, int pageSize, string key);
 	}
 }

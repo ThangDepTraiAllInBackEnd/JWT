@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Core.Auth
 {
-	public class LoginModel
-	{
-		[Required(ErrorMessage = "User Name is required")]
-		public string? Username { get; set; }
+    public class LoginModel
+    {
+        [Required(ErrorMessage = Const.AuthentionModelErrMsg.USERNAME_IS_REQURIED)]
+        public string? Username { get; set; }
 
-		[Required(ErrorMessage = "Password is required")]
-		public string? Password { get; set; }
-	}
+        [Required(ErrorMessage = Const.AuthentionModelErrMsg.PASSWORD_IS_REQURIED)]
+        public string? Password { get; set; }
+    }
 }

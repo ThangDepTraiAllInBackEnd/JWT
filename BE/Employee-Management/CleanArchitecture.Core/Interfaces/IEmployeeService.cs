@@ -66,14 +66,14 @@ namespace CleanArchitecture.Core.Interfaces
 		///  created at: 2024/1/9
 		public Task<bool> BeforeUpdateAsync(Employee employee);
 
-		/// <summary>
-		/// Delete employess by EmployeeId list
-		/// </summary>
-		/// <param name="employees">Employee list to delete</param>
-		/// <returns>Serivce result ( sucsess with data or failed with all details )</returns>
-		///  created by: Nguyễn Thiện Thắng
-		///  created at: 2024/1/9
-		public Task<ServiceResult> DeleteManyAsync(List<Employee> employees);
+        /// <summary>
+        /// Delete employess by EmployeeId list
+        /// </summary>
+        /// <param name="employeesId">Employee id list to delete</param>
+        /// <returns>Serivce result ( sucsess with data or failed with all details )</returns>
+        ///  created by: Nguyễn Thiện Thắng
+        ///  created at: 2024/1/9
+        public Task<ServiceResult> MultipleDeleteAsync(List<Guid?> employeesId);
 
 		/// <summary>
 		/// Get total employee record in DB

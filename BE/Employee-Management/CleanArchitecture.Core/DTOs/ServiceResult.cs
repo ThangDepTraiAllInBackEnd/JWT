@@ -24,7 +24,7 @@ namespace CleanArchitecture.Core.DTOs
 		/// <summary>
 		/// Developer message
 		/// </summary>
-		public string MsgResource_VN { get; set; }
+		public string DevMsg { get; set; }
 		/// <summary>
 		/// user message
 		/// </summary>

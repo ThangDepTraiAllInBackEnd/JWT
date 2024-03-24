@@ -201,6 +201,9 @@
   <data name="EmployeeFIle_NameIsRequired" xml:space="preserve">
     <value>Tên Nhân viên không được để trống</value>
   </data>
+  <data name="EmployeeIdAlreadyExist" xml:space="preserve">
+    <value>Mã định danh nhân viên đã tồn tại</value>
+  </data>
   <data name="EmployeeIdDuplicate" xml:space="preserve">
     <value>Mã định danh nhân viên không được trùng</value>
   </data>

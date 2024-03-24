@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FtC3vY2cDIjEBFIXUjIY/AaTLpGXDTll45XJyNIqhOPKPlx1B/TnM9NdPWHiwigj4kTqXLwgg5xLO3+hW2PZww==",
+  "dgSpecHash": "Y2Gh8e7m04ZX89eEs9mAAqzhBDuG5OwESLmJ/Ocy75jDWRqmZcFu/8029RqLiu6Il3/Qg1UpOe7m3zCiCRSK6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core.UnitTests\\CleanArchitecture.Core.UnitTests.csproj",
+  "projectFilePath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core.UnitTests\\CleanArchitecture.Core.UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

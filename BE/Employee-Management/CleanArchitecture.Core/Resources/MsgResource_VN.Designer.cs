@@ -313,6 +313,15 @@ namespace CleanArchitecture.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã định danh nhân viên đã tồn tại.
+        /// </summary>
+        public static string EmployeeIdAlreadyExist {
+            get {
+                return ResourceManager.GetString("EmployeeIdAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã định danh nhân viên không được trùng.
         /// </summary>
         public static string EmployeeIdDuplicate {

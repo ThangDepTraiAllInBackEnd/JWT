@@ -5339,11 +5339,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
+      "projectUniqueName": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
       "projectName": "CleanArchitecture.Core",
-      "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
+      "projectPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\CleanArchitecture.Core.csproj",
       "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\vaivut\\BE\\Employee-Management\\CleanArchitecture.Core\\obj\\",
+      "outputPath": "C:\\Users\\nguye\\Documents\\Misa\\Misa\\Current\\JWT\\BE\\Employee-Management\\CleanArchitecture.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",

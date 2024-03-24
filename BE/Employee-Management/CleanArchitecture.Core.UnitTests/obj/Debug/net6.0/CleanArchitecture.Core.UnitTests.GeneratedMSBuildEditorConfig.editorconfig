@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CleanArchitecture.Core.UnitTests
-build_property.ProjectDir = C:\Users\nguye\Documents\Misa\Misa\Current\vaivut\BE\Employee-Management\CleanArchitecture.Core.UnitTests\
+build_property.ProjectDir = C:\Users\nguye\Documents\Misa\Misa\Current\JWT\BE\Employee-Management\CleanArchitecture.Core.UnitTests\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -32,19 +32,44 @@ namespace CleanArchitecture.Core.Exeptions
 			{
 				await _next(context);
 			}
-			catch (ValidateExeption ex)
+			catch (BadRequestCustomException ex)
 			{
 				ServiceResult serviceResult = new ServiceResult()
 				{
 					Success = false,
 					Code = System.Net.HttpStatusCode.BadRequest,
 					Data = null,
-					MsgResource_VN = $"{ex.Message}",
+					DevMsg = $"{ex.Message}",
 					UserMsg = $"{ex.Message}",
 				};
 				var res = JsonConvert.SerializeObject(serviceResult);
 				await context.Response.WriteAsync(res);
 			}
+			catch(NotFoundCustomException ex) {
+                ServiceResult serviceResult = new ServiceResult()
+                {
+                    Success = false,
+                    Code = System.Net.HttpStatusCode.NotFound,
+                    Data = null,
+                    DevMsg = $"{ex.Message}",
+                    UserMsg = $"{ex.Message}",
+                };
+                var res = JsonConvert.SerializeObject(serviceResult);
+                await context.Response.WriteAsync(res);
+            }
+			catch(InternalServerErrorCustomException ex)
+			{
+                ServiceResult serviceResult = new ServiceResult()
+                {
+                    Success = false,
+                    Code = System.Net.HttpStatusCode.InternalServerError,
+                    Data = null,
+                    DevMsg = $"{ex.Message}",
+                    UserMsg = $"{ex.Message}",
+                };
+                var res = JsonConvert.SerializeObject(serviceResult);
+                await context.Response.WriteAsync(res);
+            }
 			catch (Exception ex)
 			{
 				ServiceResult serviceResult = new ServiceResult()
@@ -52,13 +77,12 @@ namespace CleanArchitecture.Core.Exeptions
 					Success = false,
 					Code = System.Net.HttpStatusCode.InternalServerError,
 					Data = null,
-					MsgResource_VN = $"{ex.Message}",
+					DevMsg = $"{ex.Message}",
 					UserMsg = $"{ex.Message}",
 				};
 				var res = JsonConvert.SerializeObject(serviceResult);
 				await context.Response.WriteAsync(res);
 			}
-
 		}
 	}
 }
